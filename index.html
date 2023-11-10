@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <button><i class="fa fa-angle-left fa-3x" aria-hidden="true" onclick="window.close()"></i></button>
+        <h1 class="txt-c">Todo App</h1>
+        <button><i class="fa fa-ellipsis-v fa-3x" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="ip">
+        <div>
+        <input type="text" id="title" placeholder="Title">
+        <textarea cols="30" rows="10" placeholder="Description" id="desc"></textarea>
+        <section>
+        <button id="cancel"><i class="fa fa-times" aria-hidden="true"></i>cancel</button>
+        <button id="btn" onclick="addbtn()"><i class="fa fa-plus" aria-hidden="true"></i>Add ToDo</button>
+    </section>
+        </div>
+    </div>
+    <div class="time">
+        <h1>Today</h1>
+    </div>
+    <div class="container">
+
+    </div>
+    <button class="add" onclick="addtodo()">
+        <i class="fa fa-plus fa-5x" aria-hidden="true "></i>
+    </button>
+    <script src="script.js"></script>
+</body>
+</html>
