@@ -130,11 +130,11 @@ textarea{
     background-color: #fff;
     color: black;
 }
-.container div h3{
+.container div h1{
     margin: 0 10px ;
     width: 15%;
 }
-.container div p{
+.container div h3{
     width: 75%;
 }
 #btn{

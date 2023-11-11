@@ -12,13 +12,15 @@ let titleval;
 let descval;
 let objval;
 let i;
+let buttons = document.querySelectorAll('.edit');
 onload = function () {
     let dataLs = JSON.parse(localStorage.getItem('data'));
     if (localStorage.length > 0) {
-        listval = dataLs.map((e) => {return {"title": e.title,"desc": e.desc}})
+        listval = dataLs;
         displaycontent();
     }
     timesetter();
+
 }
 function timesetter(){
     temp = new Date()
@@ -34,6 +36,9 @@ cancel.addEventListener("click",()=>{
     desc.value = "";
 });
 
+function pushLS(){
+    localStorage.setItem('data', JSON.stringify(listval));
+}
 
 function addbtn(){
     titleval = title.value;
@@ -47,17 +52,27 @@ function addbtn(){
     displaycontent();
     ip.style.display = 'none';
 }
+else if(titleval.length > 0 && descval.length <= 0) {
+    alert('please add description');
+    desc.style.border = '2px solid red';
+}
+else if(descval.length > 0 && titleval.length <= 0) {
+    alert('please add title');
+    title.style.border = '2px solid red';
+}
 else{
     alert('Please add title and description');
+    desc.style.border = '2px solid red';
+    title.style.border = '2px solid red';
 }}
 
 function displaycontent() {
-    let items = listval.map((e) => {
+    let items = listval.map((e,i) => {
         let elem = `<div>
-        <h3>${e.title}</h3>
-        <p>${e.desc}</p>
-        <button onclick="edit()"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></button>
-        <button onclick="remove()"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></div>`
+        <h1>${e.title}</h1>
+        <h3>${e.desc}</h3>
+        <button onclick="edit(${i})"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></button>
+        <button onclick="remove(${i})"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></button></div>`
         return elem
     })
     content.innerHTML = items.join('')
@@ -65,39 +80,30 @@ function displaycontent() {
 
 
 
-function remove() {
-    getindex()
-    listval.splice(getindex(), 1)
-    localStorage.setItem('data', JSON.stringify(listval));
+function remove(i) {
+    listval.splice(i, 1);
+    pushLS();
     displaycontent();
 }
-function pushLS(){
-    localStorage.setItem('data', JSON.stringify(listval));
-}
 
-function getindex(){
-    div = document.querySelector('.container div:has(button:focus)')
-    temparr = div.innerText.split('\n')
-let index = listval.findIndex(item => item.title === temparr[0] && item.desc === temparr[1])
-return index
-}
-function edit(){
+
+
+function edit(i){
     ip.style.display = 'flex';
-    i = getindex();
-    title.value = temparr[0];
-    desc.value = temparr[1];
-    btn.setAttribute('onclick',"editdone()");
+    title.value = listval[i].title
+    desc.value = listval[i].desc
+    btn.setAttribute('onclick',`editdone(${i})`);
     btn.innerHTML = '<i class="fa fa-pencil" aria-hidden="true"></i>Edit';
 }
-function editdone(){
+function editdone(i){
     titleval = title.value;
     descval = desc.value;
     if(titleval.length > 0 && descval.length > 0) {
-    objval = { "title": titleval, "desc": descval };
-    listval[i]=objval;
+    listval[i].title = titleval;
+    listval[i].desc = descval;
     pushLS();
     displaycontent();
-    ip.style.display = 'none'; 
+    ip.style.display = 'none';
 }
 else {
     ip.style.display = 'none';
@@ -107,3 +113,6 @@ desc.value = '';
 btn.setAttribute('onclick',"addbtn()");
 btn.innerHTML = '<i class="fa fa-plus" aria-hidden="true"></i>Add ToDo';
 }
+
+title.addEventListener('click',()=>title.style.border = "1px solid black")
+desc.addEventListener('click',()=>desc.style.border = "1px solid black")
