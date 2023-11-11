@@ -56,7 +56,17 @@ button{
     gap: 10px;
     position: fixed; 
     padding: 50px;   
+    animation: tran 1s; 
+    animation-iteration-count: 1;
     background-color: #46b5e1;
+}
+@keyframes tran {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 .ip section {
     width: 100%;

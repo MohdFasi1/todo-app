@@ -4,6 +4,7 @@ let btn = document.querySelector('#btn');
 let content = document.querySelector('.container');
 let clk = document.querySelector('.time')
 let ip = document.querySelector('.ip');
+let ipdiv = document.querySelector('.ip div');
 let cancel = document.querySelector('#cancel');
 var listval = [];
 let div;
@@ -29,6 +30,7 @@ function timesetter(){
 }   
 function addtodo(){
     ip.style.display = "flex";
+    // ipdiv.style.animation = "tran,1s"
 }
 cancel.addEventListener("click",()=>{
     ip.style.display = "none";
